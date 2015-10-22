@@ -8,7 +8,7 @@ void setup()
   Serial.begin(9600);
 
   vw_set_rx_pin(receive_pin);
-  vw_setup(2000);	 // Bits per sec
+  vw_setup(1000);	 // Bits per sec
 
   vw_rx_start();       // Start the receiver PLL running
 }
@@ -20,6 +20,8 @@ void loop()
 
   // Non-blocking
   if (vw_get_message(buf, &buflen)) {
+    digitalWrite(led_pin, HIGH); // Flash a light to show received good message
+
     char msg[buflen];
 
     for (int i = 0; i < buflen; i++) {
@@ -27,13 +29,9 @@ void loop()
     }
 
     msg[buflen] = '\0';
-    
+
     Serial.println(msg);
   
-    digitalWrite(led_pin, HIGH); // Flash a light to show received good message
-
-    delay(200);
-
     digitalWrite(led_pin, LOW);
   }
 }
