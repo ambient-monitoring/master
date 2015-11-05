@@ -8,7 +8,7 @@ void setup()
   Serial.begin(9600);
 
   vw_set_rx_pin(receive_pin);
-  vw_setup(1000);	 // Bits per sec
+  vw_setup(2000);	 // Bits per sec
 
   vw_rx_start();       // Start the receiver PLL running
 }
